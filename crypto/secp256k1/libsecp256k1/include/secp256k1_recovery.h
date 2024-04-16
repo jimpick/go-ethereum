@@ -14,8 +14,8 @@ extern "C" {
  *  guaranteed to be portable between different platforms or versions. It is
  *  however guaranteed to be 65 bytes in size, and can be safely copied/moved.
  *  If you need to convert to a format suitable for storage or transmission, use
- *  the secp256k1_ecdsa_signature_serialize_* and
- *  secp256k1_ecdsa_signature_parse_* functions.
+ *  the glif2_secp256k1_ecdsa_signature_serialize_* and
+ *  glif2_secp256k1_ecdsa_signature_parse_* functions.
  *
  *  Furthermore, it is guaranteed that identical signatures (including their
  *  recoverability) will have identical representation, so they can be
@@ -33,7 +33,7 @@ typedef struct {
  *  In:   input64: a pointer to a 64-byte compact signature
  *        recid:   the recovery id (0, 1, 2 or 3)
  */
-SECP256K1_API int secp256k1_ecdsa_recoverable_signature_parse_compact(
+SECP256K1_API int glif2_secp256k1_ecdsa_recoverable_signature_parse_compact(
     const secp256k1_context* ctx,
     secp256k1_ecdsa_recoverable_signature* sig,
     const unsigned char *input64,
@@ -46,7 +46,7 @@ SECP256K1_API int secp256k1_ecdsa_recoverable_signature_parse_compact(
  *  Out: sig:    a pointer to a normal signature (cannot be NULL).
  *  In:  sigin:  a pointer to a recoverable signature (cannot be NULL).
  */
-SECP256K1_API int secp256k1_ecdsa_recoverable_signature_convert(
+SECP256K1_API int glif2_secp256k1_ecdsa_recoverable_signature_convert(
     const secp256k1_context* ctx,
     secp256k1_ecdsa_signature* sig,
     const secp256k1_ecdsa_recoverable_signature* sigin
@@ -60,7 +60,7 @@ SECP256K1_API int secp256k1_ecdsa_recoverable_signature_convert(
  *        recid:    a pointer to an integer to hold the recovery id (can be NULL).
  *  In:   sig:      a pointer to an initialized signature object (cannot be NULL)
  */
-SECP256K1_API int secp256k1_ecdsa_recoverable_signature_serialize_compact(
+SECP256K1_API int glif2_secp256k1_ecdsa_recoverable_signature_serialize_compact(
     const secp256k1_context* ctx,
     unsigned char *output64,
     int *recid,
@@ -75,10 +75,10 @@ SECP256K1_API int secp256k1_ecdsa_recoverable_signature_serialize_compact(
  *  Out:     sig:    pointer to an array where the signature will be placed (cannot be NULL)
  *  In:      msg32:  the 32-byte message hash being signed (cannot be NULL)
  *           seckey: pointer to a 32-byte secret key (cannot be NULL)
- *           noncefp:pointer to a nonce generation function. If NULL, secp256k1_nonce_function_default is used
+ *           noncefp:pointer to a nonce generation function. If NULL, glif2_secp256k1_nonce_function_default is used
  *           ndata:  pointer to arbitrary data used by the nonce generation function (can be NULL)
  */
-SECP256K1_API int secp256k1_ecdsa_sign_recoverable(
+SECP256K1_API int glif2_secp256k1_ecdsa_sign_recoverable(
     const secp256k1_context* ctx,
     secp256k1_ecdsa_recoverable_signature *sig,
     const unsigned char *msg32,

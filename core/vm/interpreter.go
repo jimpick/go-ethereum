@@ -17,10 +17,10 @@
 package vm
 
 import (
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/jimpick/go-ethereum/common"
+	"github.com/jimpick/go-ethereum/common/math"
+	"github.com/jimpick/go-ethereum/crypto"
+	"github.com/jimpick/go-ethereum/log"
 )
 
 // Config are the configuration options for the Interpreter

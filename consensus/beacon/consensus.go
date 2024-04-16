@@ -21,14 +21,14 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/jimpick/go-ethereum/common"
+	"github.com/jimpick/go-ethereum/consensus"
+	"github.com/jimpick/go-ethereum/consensus/misc"
+	"github.com/jimpick/go-ethereum/core/state"
+	"github.com/jimpick/go-ethereum/core/types"
+	"github.com/jimpick/go-ethereum/params"
+	"github.com/jimpick/go-ethereum/rpc"
+	"github.com/jimpick/go-ethereum/trie"
 )
 
 // Proof-of-stake protocol constants.

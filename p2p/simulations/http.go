@@ -30,12 +30,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/simulations/adapters"
-	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/gorilla/websocket"
+	"github.com/jimpick/go-ethereum/event"
+	"github.com/jimpick/go-ethereum/p2p"
+	"github.com/jimpick/go-ethereum/p2p/enode"
+	"github.com/jimpick/go-ethereum/p2p/simulations/adapters"
+	"github.com/jimpick/go-ethereum/rpc"
 	"github.com/julienschmidt/httprouter"
 )
 

@@ -22,11 +22,11 @@ import (
 	"time"
 
 	"github.com/VictoriaMetrics/fastcache"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/trie/triedb/hashdb"
-	"github.com/ethereum/go-ethereum/trie/trienode"
+	"github.com/jimpick/go-ethereum/common"
+	"github.com/jimpick/go-ethereum/ethdb"
+	"github.com/jimpick/go-ethereum/log"
+	"github.com/jimpick/go-ethereum/trie/triedb/hashdb"
+	"github.com/jimpick/go-ethereum/trie/trienode"
 )
 
 // Config defines all necessary options for database.

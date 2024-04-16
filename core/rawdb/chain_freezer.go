@@ -22,10 +22,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/jimpick/go-ethereum/common"
+	"github.com/jimpick/go-ethereum/ethdb"
+	"github.com/jimpick/go-ethereum/log"
+	"github.com/jimpick/go-ethereum/params"
 )
 
 const (

@@ -17,7 +17,7 @@
 package vm
 
 import (
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/jimpick/go-ethereum/params"
 )
 
 func minSwapStack(n int) int {

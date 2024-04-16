@@ -187,7 +187,7 @@ static void glif2_secp256k1_ecdsa_signature_load(const secp256k1_context* ctx, s
     (void)ctx;
     if (sizeof(secp256k1_scalar) == 32) {
         /* When the secp256k1_scalar type is exactly 32 byte, use its
-         * representation inside glif2_secp256k1_ecdsa_signature, as conversion is very fast.
+         * representation inside secp256k1_ecdsa_signature, as conversion is very fast.
          * Note that glif2_secp256k1_ecdsa_signature_save must use the same representation. */
         memcpy(r, &sig->data[0], 32);
         memcpy(s, &sig->data[32], 32);

@@ -27,12 +27,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/internal/testlog"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/rlpx"
+	"github.com/jimpick/go-ethereum/crypto"
+	"github.com/jimpick/go-ethereum/internal/testlog"
+	"github.com/jimpick/go-ethereum/log"
+	"github.com/jimpick/go-ethereum/p2p/enode"
+	"github.com/jimpick/go-ethereum/p2p/enr"
+	"github.com/jimpick/go-ethereum/p2p/rlpx"
 )
 
 type testTransport struct {

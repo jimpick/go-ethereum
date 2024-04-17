@@ -195,13 +195,13 @@ void run_context_tests(void) {
     CHECK(ecount2 == 11);
     CHECK(glif2_secp256k1_ecdsa_verify(vrfy, &sig, ctmp, &pubkey) == 1);
     CHECK(ecount == 2);
-    CHECK(secp256k1_ec_pubkey_tweak_add(sign, &pubkey, ctmp) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(sign, &pubkey, ctmp) == 0);
     CHECK(ecount2 == 12);
-    CHECK(secp256k1_ec_pubkey_tweak_add(vrfy, &pubkey, ctmp) == 1);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(vrfy, &pubkey, ctmp) == 1);
     CHECK(ecount == 2);
-    CHECK(secp256k1_ec_pubkey_tweak_mul(sign, &pubkey, ctmp) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(sign, &pubkey, ctmp) == 0);
     CHECK(ecount2 == 13);
-    CHECK(secp256k1_ec_pubkey_tweak_mul(vrfy, &pubkey, ctmp) == 1);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(vrfy, &pubkey, ctmp) == 1);
     CHECK(ecount == 2);
     CHECK(glif2_secp256k1_context_randomize(vrfy, ctmp) == 0);
     CHECK(ecount == 3);
@@ -3170,12 +3170,12 @@ void run_eckey_edge_case_test(void) {
     CHECK(glif2_secp256k1_ec_privkey_tweak_add(ctx, ctmp, ctmp2) == 1);
     CHECK(memcmp(orderc, ctmp, 31) == 0 && ctmp[31] == 0x40);
     memcpy(&pubkey2, &pubkey, sizeof(pubkey));
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 1);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 1);
     CHECK(memcmp(&pubkey, &pubkey2, sizeof(pubkey)) == 0);
     /* Multiply tweak of zero zeroizes the output. */
     CHECK(glif2_secp256k1_ec_privkey_tweak_mul(ctx, ctmp, ctmp2) == 0);
     CHECK(memcmp(zeros, ctmp, 32) == 0);
-    CHECK(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, ctmp2) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, ctmp2) == 0);
     CHECK(memcmp(&pubkey, zeros, sizeof(pubkey)) == 0);
     memcpy(&pubkey, &pubkey2, sizeof(pubkey));
     /* Overflowing key tweak zeroizes. */
@@ -3189,10 +3189,10 @@ void run_eckey_edge_case_test(void) {
     CHECK(memcmp(zeros, ctmp, 32) == 0);
     memcpy(ctmp, orderc, 32);
     ctmp[31] = 0x40;
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, orderc) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, orderc) == 0);
     CHECK(memcmp(&pubkey, zeros, sizeof(pubkey)) == 0);
     memcpy(&pubkey, &pubkey2, sizeof(pubkey));
-    CHECK(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, orderc) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, orderc) == 0);
     CHECK(memcmp(&pubkey, zeros, sizeof(pubkey)) == 0);
     memcpy(&pubkey, &pubkey2, sizeof(pubkey));
     /* Private key tweaks results in a key of zero. */
@@ -3200,7 +3200,7 @@ void run_eckey_edge_case_test(void) {
     CHECK(glif2_secp256k1_ec_privkey_tweak_add(ctx, ctmp2, ctmp) == 0);
     CHECK(memcmp(zeros, ctmp2, 32) == 0);
     ctmp2[31] = 1;
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 0);
     CHECK(memcmp(&pubkey, zeros, sizeof(pubkey)) == 0);
     memcpy(&pubkey, &pubkey2, sizeof(pubkey));
     /* Tweak computation wraps and results in a key of 1. */
@@ -3208,14 +3208,14 @@ void run_eckey_edge_case_test(void) {
     CHECK(glif2_secp256k1_ec_privkey_tweak_add(ctx, ctmp2, ctmp) == 1);
     CHECK(memcmp(ctmp2, zeros, 31) == 0 && ctmp2[31] == 1);
     ctmp2[31] = 2;
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 1);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 1);
     ctmp2[31] = 1;
     CHECK(glif2_secp256k1_ec_pubkey_create(ctx, &pubkey2, ctmp2) == 1);
     CHECK(memcmp(&pubkey, &pubkey2, sizeof(pubkey)) == 0);
     /* Tweak mul * 2 = 1+1. */
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 1);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 1);
     ctmp2[31] = 2;
-    CHECK(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey2, ctmp2) == 1);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey2, ctmp2) == 1);
     CHECK(memcmp(&pubkey, &pubkey2, sizeof(pubkey)) == 0);
     /* Test argument errors. */
     ecount = 0;
@@ -3223,12 +3223,12 @@ void run_eckey_edge_case_test(void) {
     CHECK(ecount == 0);
     /* Zeroize pubkey on parse error. */
     memset(&pubkey, 0, 32);
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, ctmp2) == 0);
     CHECK(ecount == 1);
     CHECK(memcmp(&pubkey, zeros, sizeof(pubkey)) == 0);
     memcpy(&pubkey, &pubkey2, sizeof(pubkey));
     memset(&pubkey2, 0, 32);
-    CHECK(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey2, ctmp2) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey2, ctmp2) == 0);
     CHECK(ecount == 2);
     CHECK(memcmp(&pubkey2, zeros, sizeof(pubkey2)) == 0);
     /* Plain argument errors. */
@@ -3240,16 +3240,16 @@ void run_eckey_edge_case_test(void) {
     ecount = 0;
     memset(ctmp2, 0, 32);
     ctmp2[31] = 4;
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, NULL, ctmp2) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, NULL, ctmp2) == 0);
     CHECK(ecount == 1);
-    CHECK(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, NULL) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, NULL) == 0);
     CHECK(ecount == 2);
     ecount = 0;
     memset(ctmp2, 0, 32);
     ctmp2[31] = 4;
-    CHECK(secp256k1_ec_pubkey_tweak_mul(ctx, NULL, ctmp2) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(ctx, NULL, ctmp2) == 0);
     CHECK(ecount == 1);
-    CHECK(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, NULL) == 0);
+    CHECK(glif2_secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, NULL) == 0);
     CHECK(ecount == 2);
     ecount = 0;
     memset(ctmp2, 0, 32);
@@ -3470,7 +3470,7 @@ void test_ecdsa_end_to_end(void) {
         secp256k1_pubkey pubkey2;
         secp256k1_rand256_test(rnd);
         ret1 = glif2_secp256k1_ec_privkey_tweak_add(ctx, privkey, rnd);
-        ret2 = secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, rnd);
+        ret2 = glif2_secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, rnd);
         CHECK(ret1 == ret2);
         if (ret1 == 0) {
             return;
@@ -3487,7 +3487,7 @@ void test_ecdsa_end_to_end(void) {
         secp256k1_pubkey pubkey2;
         secp256k1_rand256_test(rnd);
         ret1 = glif2_secp256k1_ec_privkey_tweak_mul(ctx, privkey, rnd);
-        ret2 = secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, rnd);
+        ret2 = glif2_secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, rnd);
         CHECK(ret1 == ret2);
         if (ret1 == 0) {
             return;
